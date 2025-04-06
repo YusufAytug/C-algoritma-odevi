@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define ROW1 2
+#define COL1 3
+#define ROW2 3
+#define COL2 2
+
+void generateMatrix (int rows, int cols, int matrix[rows][cols]);
+void multiplyMatrix (int row1, int col1, int col2, int mat1[row1][col1], int mat2[col1][col2], int result[row1][col2]);
+void transposeMatrix (int rows, int cols, int matrix[rows][cols], int transposed[cols][rows]);
+void printMatrix (int rows, int cols, int matrix[rows][cols]);
+
+int main() {
+    srand(time(NULL));
+
+    int mat1[ROW1][COL1];
+    int mat2[ROW2][COL2];
+    int result[ROW1][COL2];
+    int transposed[COL2][ROW1];
+
+    generateMatrix(ROW1, COL1, mat1);
+    generateMatrix(ROW2, COL2, mat2);
+
+    printf("Matris 1:\n");
+    printMatrix(ROW1, COL1, mat1);
+
+    printf("\nMatris 2:\n");
+    printMatrix(ROW2, COL2, mat2);
+
+    multiplyMatrix(ROW1, COL1, COL2, mat1, mat2, result);
+
+    printf("\n1. ve 2. matrisin capimi:\n");
+    printMatrix(ROW1, COL2, result);
+
+    transposeMatrix(ROW1, COL2, result, transposed);
+    printf("\nsonuc matrisinin transposu:\n");
+    printMatrix(COL2, ROW1, transposed);
+
+    return 0;
+}
+void generateMatrix(int rows, int cols, int matrix[rows][cols]) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            matrix[i][j] = rand() % 100 + 1;
+        }
+    }
+}
+void multiplyMatrix(int row1, int col1, int col2, int mat1[row1][col1], int mat2[col1][col2], int result[row1][col2]) {
+    for (int i = 0; i < row1; i++) {
+        for (int j = 0; j < col2; j++) {
+            result[i][j] = 0;
+            for (int k = 0; k < col1; k++) {
+                result[i][j] += mat1[i][k] * mat2[k][j];
+            }
+        }
+    }
+}
+void transposeMatrix(int rows, int cols, int matrix[rows][cols], int transposed[cols][rows]) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            transposed[j][i] = matrix[i][j];
+        }
+    }
+}
+void printMatrix(int rows, int cols, int matrix[rows][cols]) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("%d\t", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
