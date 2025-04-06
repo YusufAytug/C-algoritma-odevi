@@ -31,7 +31,7 @@ int main() {
 
     multiplyMatrix(ROW1, COL1, COL2, mat1, mat2, result);
 
-    printf("\n1. ve 2. matrisin capimi:\n");
+    printf("\n1. ve 2. matrisin carpimi:\n");
     printMatrix(ROW1, COL2, result);
 
     transposeMatrix(ROW1, COL2, result, transposed);
